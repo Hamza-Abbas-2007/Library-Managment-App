@@ -12,8 +12,8 @@
       <TextField fx:id="isbnSearchField" layoutX="58.0" layoutY="69.0" text="ISBN" />
       <Button fx:id="SearchButton" layoutX="221.0" layoutY="69.0" mnemonicParsing="false" onAction="#handleSearchBook" text="search" />
       <ImageView fitHeight="253.0" fitWidth="200.0" layoutX="364.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="477.0" layoutY="339.0" mnemonicParsing="false" text="Retrieve" />
-      <Button layoutX="398.0" layoutY="339.0" mnemonicParsing="false" text="Loan out" />
+      <Button fx:id="RetrieveBtn" layoutX="477.0" layoutY="339.0" mnemonicParsing="false" onAction="#HandleRecieveBook" text="Retrieve" />
+      <Button fx:id="LoanBtn" layoutX="398.0" layoutY="339.0" mnemonicParsing="false" onAction="#HandleLoanBook" text="Loan out" />
       <Text layoutX="49.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="44.0">
          <font>
             <Font size="18.0" />

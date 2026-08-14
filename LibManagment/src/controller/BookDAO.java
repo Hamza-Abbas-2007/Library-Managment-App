@@ -67,5 +67,28 @@ public class BookDAO {
 	       }
 	       return null; 
 	}
+	
+	public void SetisAvailable(String isbn, Boolean isAvailable) {
+		String sql = "UPDATE books SET isAvailable = ? WHERE isbn = ?";
+		
+		try (Connection conn = db.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)){
+	        stmt.setBoolean(1, isAvailable);
+	        stmt.setString(2, isbn);
+	        
+	        int rowsUpdated = stmt.executeUpdate();
+	        
+	        if(rowsUpdated == 0) {
+	        	System.out.println("No book found with ISBN: " + isbn);
+	        }
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+				
+				
+			
+	}
 }
+
 

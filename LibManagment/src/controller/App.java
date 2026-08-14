@@ -36,6 +36,8 @@ public class App extends Application {
 	  
 	  private BookDAO dbDAO = new BookDAO();
 	  
+	  private Book SelectedBook;
+	  
 	@Override
 	public void start(Stage arg0) throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("gui.fxml"));
@@ -80,10 +82,33 @@ public class App extends Application {
 	@FXML
 	private void handleSearchBook() {
 		Book SearchedBook = dbDAO.searchByISBN(isbnSearchField.getText());
+		SelectedBook = SearchedBook;
 		titleText.setText(SearchedBook.getTitle());
 		authortext.setText(SearchedBook.getAuthor());
 		isAvailabletext.setText(String.valueOf(SearchedBook.isAvailable()));
 		System.out.println(SearchedBook.getTitle());
+	}
+	
+	@FXML
+	private void HandleLoanBook() {
+		if(SelectedBook.isAvailable() == true) {
+			dbDAO.SetisAvailable(SelectedBook.getIsbn(), false);
+			SelectedBook.setAvailable(false);
+			isAvailabletext.setText(String.valueOf(SelectedBook.isAvailable()));
+		}else{
+			System.out.println("this book is not available");
+		}
+	}
+	
+	@FXML
+	private void HandleRecieveBook() {
+		if(SelectedBook.isAvailable() == false) {
+			dbDAO.SetisAvailable(SelectedBook.getIsbn(), true);
+			SelectedBook.setAvailable(true);
+			isAvailabletext.setText(String.valueOf(SelectedBook.isAvailable()));
+		}else{
+			System.out.println("this book is already here");
+		}
 	}
 
 }
